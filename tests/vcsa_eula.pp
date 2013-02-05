@@ -1,7 +1,9 @@
+import 'data.pp'
+
 transport { 'demo':
-  username => 'root',
-  password => 'vmware',
-  server   => '192.168.101.157',
+  username => $vcsa['username'],
+  password => $vcsa['password'],
+  server   => $vcsa['server'],
 }
 
 vcsa_eula { 'demo':

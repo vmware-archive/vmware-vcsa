@@ -1,5 +1,9 @@
+import 'data.pp'
+
 vcsa { 'demo':
-  server   => '192.168.232.147',
+  username => $vcsa['username'],
+  password => $vcsa['password'],
+  server   => $vcsa['server'],
   db_type  => 'embedded',
   capacity => 'm',
 }
