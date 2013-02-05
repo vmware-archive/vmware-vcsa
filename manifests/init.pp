@@ -1,5 +1,5 @@
 # vCSA appliance configuration.
-define vcenter::vcsa (
+define vcsa (
   $username      = 'root',     #: vcsa appliance username
   $password      = 'vmware',   #: vcsa appliance password
   $server,                     #: vCSA appliance server name or ip address
@@ -9,7 +9,7 @@ define vcenter::vcsa (
   $db_instance   = undef,
   $db_user       = undef,
   $db_password   = undef,
-  $capacity      = 'small',    #: inventory accepts small, medium, large
+  $capacity      = 'small',    #: inventory accepts small, medium, large, custom
   $java_max_heap = undef       #: manual jmx heap max size configuration
 ) {
 
@@ -32,8 +32,11 @@ define vcenter::vcsa (
       $jmx['is']     = 6144
       $jmx['sps']    = 2048
     }
-    default: {
+    'custom': {
       $jmx = $java_max_heap
+    }
+    default: {
+      fail("Unknown capacity ${capacity} (accepts: small, medium, large, custom)")
     }
   }
 
