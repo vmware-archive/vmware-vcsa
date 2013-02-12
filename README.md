@@ -1,6 +1,23 @@
 # VMware vCSA module
 
-This module deploys and manages VMware vCSA.
+This module initializes and manages VMware vCenter Server Appliance (vCSA).
+
+## Description
+
+VMware vCenter Server Appliance does not include or support puppet agent. The
+module manages vCSA through an intermediate host running puppet. The management
+host connects to vCSA via ssh to perform the initialization and configuration:
+
+   +------------+         +-------+
+   |            |   ssh   | vCSA  |
+   |   Puppet   | +-----> +-------+
+   | Management |   |
+   |    Host    |   |     +-------+
+   |            |    ---> | vCSA  |
+   +------------+         +-------+
+
+A single management host can support any number of vCSA as long it has
+connectivity to the appliances.
 
 ## Installation
 
@@ -8,7 +25,8 @@ $ puppet module install vcenter/vcsa
 
 ## Usage
 
-See init.pp for additional options:
+Deploy vCSA image to ESX (via ovftool). The following manifest will initialize
+and configure the appliance with embedded database and sso:
 
     vcsa { 'test':
       username => 'root',
@@ -17,3 +35,6 @@ See init.pp for additional options:
       db_type  => 'embedded',
       capacity => 'm',
     }
+
+See init.pp for additional options, and 'vpxd_servicecfg help' for additional
+information.
