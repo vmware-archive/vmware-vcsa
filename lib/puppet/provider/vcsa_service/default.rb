@@ -1,3 +1,4 @@
+require 'pathname'
 provider_path = Pathname.new(__FILE__).parent.parent
 require File.join(provider_path, 'vcsa')
 
