@@ -8,13 +8,13 @@ VMware vCenter Server Appliance does not include or support puppet agent. The
 module manages vCSA through an intermediate host running puppet. The management
 host connects to vCSA via ssh to perform the initialization and configuration:
 
-   +------------+         +-------+
-   |            |   ssh   | vCSA  |
-   |   Puppet   | +-----> +-------+
-   | Management |   |
-   |    Host    |   |     +-------+
-   |            |    ---> | vCSA  |
-   +------------+         +-------+
+    +------------+         +-------+
+    |            |   ssh   | vCSA  |
+    |   Puppet   | +-----> +-------+
+    | Management |   |
+    |    Host    |   |     +-------+
+    |            |    ---> | vCSA  |
+    +------------+         +-------+
 
 A single management host can support any number of vCSA as long it has
 connectivity to the appliances.
