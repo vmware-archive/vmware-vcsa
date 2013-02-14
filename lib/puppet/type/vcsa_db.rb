@@ -1,3 +1,4 @@
+# Copyright (C) 2013 VMware, Inc.
 Puppet::Type.newtype(:vcsa_db) do
   @doc = 'Manage vCSA db.'
 
