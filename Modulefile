@@ -8,4 +8,4 @@ description   'VMware vCSA deployment and management.'
 project_page  'https://github.com/puppetlabs/VMware-vCSA'
 
 ## Add dependencies, if any:
-dependency 'vmware/common', '>= 0.0.1'
+dependency 'vmware/vmware', '>= 0.0.1'
