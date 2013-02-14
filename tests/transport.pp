@@ -1,3 +1,4 @@
+# Copyright (C) 2013 VMware, Inc.
 # This example is intended to fail to show net::ssh error propogate up:
 # Error: /Stage[main]//Vcsa_eula[demo]: Could not evaluate: Connection refused - connect(2)
 import 'data.pp'

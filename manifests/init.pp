@@ -1,3 +1,4 @@
+# Copyright (C) 2013 VMware, Inc.
 # vCSA appliance configuration.
 define vcsa (
   $username      = 'root',     #: vcsa appliance username

@@ -1,3 +1,4 @@
+# Copyright (C) 2013 VMware, Inc.
 Puppet::Type.newtype(:vcsa_sso) do
   @doc = 'Manage vCSA sso.'
 

@@ -1,4 +1,5 @@
 #!/usr/bin/env rspec
+# Copyright (C) 2013 VMware, Inc.
 
 require 'spec_helper'
 
