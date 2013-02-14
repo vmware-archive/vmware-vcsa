@@ -1,3 +1,4 @@
+# Copyright (C) 2013 VMware, Inc.
 $vcsa = {
   'username' => 'root',
   'password' => 'vmware',
