@@ -38,6 +38,7 @@ module PuppetX::Puppetlabs::Transport
     end
 
     def close
+      Puppet.debug("#{self.class} closing connection to: #{@host}")
       @ssh.close if @ssh
     end
   end
