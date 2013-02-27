@@ -21,7 +21,7 @@ connectivity to the appliances.
 
 ## Installation
 
-$ puppet module install vcenter/vcsa
+$ puppet module install vmware/vcsa
 
 ## Usage
 
