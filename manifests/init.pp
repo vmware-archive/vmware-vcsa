@@ -45,6 +45,9 @@ define vcsa (
     username => $username,
     password => $password,
     server   => $server,
+    options  => {
+      'user_known_hosts_file' => '/dev/null',
+    },
   }
 
   vcsa_eula { $name:
