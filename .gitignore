@@ -6,6 +6,7 @@ tests/data.pp
 .bundle
 .config
 .bak
+Gemfile.lock
 coverage
 InstalledFiles
 lib/bundler/man

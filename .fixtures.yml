@@ -1,0 +1,7 @@
+fixtures:
+  repositories:
+    vmware_lib:
+      repo: 'git@github.com:nanliu/vmware-vmware_lib.git'
+      branch: 'upgrade'
+  symlinks:
+    'vcsa': "#{source_dir}"
