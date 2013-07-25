@@ -1,0 +1,9 @@
+SSO_TYPE=embedded
+SSO_LS_LOCATION=https://demo.lan:7444/lookupservice/sdk
+SSO_DB_TYPE=embedded
+SSO_DB_SERVER=localhost
+SSO_DB_SERVER_PORT=5432
+SSO_DB_INSTANCE=ssodb
+SSO_DB_USER=ssod
+SSO_DB_PASSWORD=
+VC_CFG_RESULT=0
