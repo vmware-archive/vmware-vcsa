@@ -4,6 +4,7 @@ define vcsa (
   $username      = 'root',     #: vcsa appliance username
   $password      = 'vmware',   #: vcsa appliance password
   $server,                     #: vCSA appliance server name or ip address
+  $ssh_options   = { 'user_known_hosts_file' => '/dev/null' },
   $db_type       = 'embedded',
   $db_server     = undef,
   $db_port       = undef,
@@ -16,22 +17,25 @@ define vcsa (
 
   case $capacity {
     's', 'small': {
-      $jmx = {}
-      $jmx['tomcat'] = 1024
-      $jmx['is']     = 2048
-      $jmx['sps']    = 512
+      $jmx = {
+        'tomcat' => 1024,
+        'is'     => 2048,
+        'sps'    => 512,
+      }
     }
     'm', 'medium': {
-      $jmx = {}
-      $jmx['tomcat'] = 2048
-      $jmx['is']     = 4096
-      $jmx['sps']    = 1024
+      $jmx = {
+        'tomcat' => 2048,
+        'is'     => 2096,
+        'sps'    => 1024,
+      }
     }
     'l', 'large': {
-      $jmx = {}
-      $jmx['tomcat'] = 3072
-      $jmx['is']     = 6144
-      $jmx['sps']    = 2048
+      $jmx = {
+        'tomcat' => 3072,
+        'is'     => 6144,
+        'sps'    => 2048,
+      }
     }
     'custom': {
       $jmx = $java_max_heap
@@ -45,9 +49,7 @@ define vcsa (
     username => $username,
     password => $password,
     server   => $server,
-    options  => {
-      'user_known_hosts_file' => '/dev/null',
-    },
+    options  => $ssh_options,
   }
 
   vcsa_eula { $name:
