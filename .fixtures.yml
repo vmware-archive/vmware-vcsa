@@ -1,0 +1,3 @@
+fixtures:
+  repositories:
+    vmware_lib: 'git://github.com/vmware/vmware-vmware_lib.git'
