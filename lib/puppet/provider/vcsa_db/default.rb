@@ -3,7 +3,7 @@ require 'pathname'
 provider_path = Pathname.new(__FILE__).parent.parent
 require File.join(provider_path, 'vcsa')
 
-Puppet::Type.type(:vcsa_db).provide(:vcsa_db, :parent => Puppet::Provider::Vcsa ) do
+Puppet::Type.type(:vcsa_db).provide(:ssh, :parent => Puppet::Provider::Vcsa ) do
   @doc = 'Manages vCSA db'
 
   def create
