@@ -1,7 +1,5 @@
 fixtures:
   repositories:
-    vmware_lib:
-      repo: 'git://github.com/vmware/vmware-vmware_lib.git'
-      ref: 'refs/remotes/origin/development'
+    vmware_lib: 'git://github.com/vmware/vmware-vmware_lib.git'
   symlinks:
     'vcsa': "#{source_dir}"
