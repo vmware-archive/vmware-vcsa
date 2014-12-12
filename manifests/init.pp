@@ -11,8 +11,16 @@ define vcsa (
   $db_instance   = undef,
   $db_user       = undef,
   $db_password   = undef,
+  $sso_db_type   = 'embedded',
+  $sso_ls        = undef,
+  $sso_login     = undef,
+  $sso_password  = undef,
+  $sso_principal = undef,
+  $sso_is_group  = undef,
+  $sso_thumbprint = undef,
   $capacity      = 'small',    #: inventory accepts small, medium, large, custom
-  $java_max_heap = undef       #: manual jmx heap max size configuration
+  $java_max_heap = undef,      #: manual jmx heap max size configuration
+  $vpxd_state    = 'running'
 ) {
 
   case $capacity {
@@ -69,14 +77,15 @@ define vcsa (
   } ->
 
   vcsa_sso { $name:
-    ensure    => present,
-    dbtype    => $db_type,
-    server    => $db_server,
-    port      => $db_port,
-    instance  => $db_instance,
-    user      => $db_user,
-    password  => $db_password,
-    transport => Transport[$name],
+    ensure     => present,
+    dbtype     => $sso_db_type,
+    ls         => $sso_ls,
+    login      => $sso_login,
+    password   => $sso_password,
+    principal  => $sso_principal,
+    is_group   => $sso_is_group,
+    thumbprint => $sso_thumbprint,
+    transport  => Transport[$name],
   } ->
 
   vcsa_java { $name:
@@ -88,7 +97,7 @@ define vcsa (
   } ~>
 
   vcsa_service { $name:
-    ensure    => running,
+    ensure    => $vpxd_state,
     transport => Transport[$name],
   }
 }

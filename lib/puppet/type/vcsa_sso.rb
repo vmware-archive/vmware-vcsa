@@ -1,6 +1,6 @@
 # Copyright (C) 2013 VMware, Inc.
 Puppet::Type.newtype(:vcsa_sso) do
-  @doc = 'Manage vCSA sso.'
+  @doc = 'Manage vCSA sso. Parameters to match /usr/sbin/vpxd_servicecfg sso parameters. See /usr/sbin/vpxd_servicecfg -h on vCSA for additional information'
 
   ensurable
 
@@ -8,29 +8,33 @@ Puppet::Type.newtype(:vcsa_sso) do
   end
 
   newparam(:dbtype) do
-    desc 'vCSA embedded dbtype - oracle, PostgreSQL, embedded or vcdb'
-    newvalues('oracle', 'PostgreSQL', 'embedded', 'vcdb')
+    desc 'vCSA dbtype -  embedded or external'
+    newvalues('embedded', 'external')
   end
 
-  newparam(:server) do
-    desc 'vCSA embedded server - name or ip of DB server'
+  newparam(:ls) do
+    desc 'Lookup service url'
   end
 
-  newparam(:port) do
-    desc 'vCSA embedded port - port number for DB, set to 0 to use default'
-    newvalues(/\d+/)
-  end
-
-  newparam(:instance) do
-    desc 'vCSA embedded instance - database instance name'
-  end
-
-  newparam(:user) do
-    desc 'vCSA embedded user - db user name'
+  newparam(:login) do
+    desc 'LS administrator account'
   end
 
   newparam(:password) do
-    desc 'vCSA embedded password - db user password'
+    desc 'LS administrator password'
+  end
+
+  newparam(:principal) do
+    desc 'Account to be assigned as VC admin'
+  end
+
+  newparam(:is_group) do
+    desc 'The principal account is a group'
+    newvalues(:true, :false)
+  end
+
+  newparam(:thumbprint) do
+    desc 'Optional thumbprint of the lookup service`s certificate'
   end
 end
 

@@ -7,7 +7,7 @@ Puppet::Type.type(:vcsa_sso).provide(:ssh, :parent => Puppet::Provider::Vcsa ) d
   @doc = 'Manages vCSA sso'
 
   def create
-    transport.exec!("vpxd_servicecfg sso write #{resource[:dbtype]} #{resource[:server]} #{resource[:port]} #{resource[:instance]} #{resource[:user]} #{resource[:password]}")
+    transport.exec!("vpxd_servicecfg sso write #{resource[:dbtype]} #{resource[:ls]} #{resource[:login]} #{resource[:password]} #{resource[:principal]} #{resource[:is_group]} #{resource[:thumbprint]}")
   end
 
   def exists?
