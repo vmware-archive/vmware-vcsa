@@ -11,13 +11,8 @@ describe vcsa do
     @provider = stub 'provider'
 
     @resource = @type.new({
-      :name     => 'sso',
+      :name       => 'sso',
       :dbtype   => 'embedded',
-      :server   => 'localhost',
-      :port     => '5432',
-      :instance => '',
-      :user     => '',
-      :password => '',
     })
   end
 
