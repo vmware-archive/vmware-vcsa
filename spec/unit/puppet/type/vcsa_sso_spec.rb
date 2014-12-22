@@ -11,7 +11,7 @@ describe vcsa do
     @provider = stub 'provider'
 
     @resource = @type.new({
-      :name       => 'sso',
+      :name     => 'sso',
       :dbtype   => 'embedded',
     })
   end
