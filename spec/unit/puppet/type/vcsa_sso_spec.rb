@@ -13,11 +13,6 @@ describe vcsa do
     @resource = @type.new({
       :name     => 'sso',
       :dbtype   => 'embedded',
-      :server   => 'localhost',
-      :port     => '5432',
-      :instance => '',
-      :user     => '',
-      :password => '',
     })
   end
 
