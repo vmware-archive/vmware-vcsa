@@ -13,7 +13,7 @@ Puppet::Type.type(:vcsa_java).provide(:ssh, :parent => Puppet::Provider::Vcsa ) 
   end
 
   def create
-    transport.exec!("vpxd_servicecfg jvm-max-heap write #{resource[:tomcat]} #{resource[:inventory]} #{resource[:sps]}")
+    servicecfg_catch(transport.exec!("vpxd_servicecfg jvm-max-heap write #{resource[:tomcat]} #{resource[:inventory]} #{resource[:sps]}"))
   end
 
   def exists?

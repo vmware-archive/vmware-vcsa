@@ -7,7 +7,7 @@ Puppet::Type.type(:vcsa_service).provide(:ssh, :parent => Puppet::Provider::Vcsa
   @doc = 'Manages vCSA service'
 
   def create
-    transport.exec!('vpxd_servicecfg service start')
+    servicecfg_catch(transport.exec!('vpxd_servicecfg service start'))
   end
 
   def destroy

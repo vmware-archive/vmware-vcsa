@@ -7,34 +7,34 @@ Puppet::Type.newtype(:vcsa_sso) do
   newparam(:name, :namevar => true) do
   end
 
-  newparam(:dbtype) do
-    desc 'vCSA dbtype -  embedded or external'
-    newvalues('embedded', 'external')
-  end
-
-  newparam(:ls) do
-    desc 'Lookup service url'
+  newparam(:password) do
+    desc 'LS administrator password'
   end
 
   newparam(:login) do
     desc 'LS administrator account'
   end
 
-  newparam(:password) do
-    desc 'LS administrator password'
+  newparam(:thumbprint) do
+    desc 'Optional thumbprint of the lookup service`s certificate'
   end
 
-  newparam(:principal) do
+  newproperty(:dbtype) do
+    desc 'vCSA dbtype -  embedded or external'
+    newvalues('embedded', 'external')
+  end
+
+  newproperty(:ls) do
+    desc 'Lookup service url'
+  end
+
+  newproperty(:principal) do
     desc 'Account to be assigned as VC admin'
   end
 
-  newparam(:is_group) do
+  newproperty(:is_group) do
     desc 'The principal account is a group'
     newvalues(:true, :false)
-  end
-
-  newparam(:thumbprint) do
-    desc 'Optional thumbprint of the lookup service`s certificate'
   end
 end
 

@@ -7,7 +7,7 @@ Puppet::Type.type(:vcsa_eula).provide(:ssh, :parent => Puppet::Provider::Vcsa ) 
   @doc = 'Manages vCSA EULA'
 
   def accept
-    transport.exec!('vpxd_servicecfg eula accept')
+    servicecfg_catch(transport.exec!('vpxd_servicecfg eula accept'))
   end
 
   def exists?

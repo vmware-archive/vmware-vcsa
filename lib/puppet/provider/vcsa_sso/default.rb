@@ -6,6 +6,21 @@ require File.join(provider_path, 'vcsa')
 Puppet::Type.type(:vcsa_sso).provide(:ssh, :parent => Puppet::Provider::Vcsa ) do
   @doc = 'Manages vCSA sso'
 
+  %w(dbtype ls principal is_group).each do |prop|
+    define_method(prop) do
+      case prop
+      when 'dbtype'    then vpxd_servicecfg['SSO_TYPE']
+      when 'ls'        then vpxd_servicecfg['SSO_LS_LOCATION']
+      when 'principal' then vpxd_servicecfg['SSO_VC_ADMIN_USERNAME']
+      when 'is_group'  then vpxd_servicecfg['SSO_VC_ADMIN_IS_GROUP']
+      end
+    end
+
+    define_method("#{prop}=") do |value|
+       @update = true
+    end
+  end
+
   def addparam(paramlist, param_validation, param)
     if resource[param].nil?
       param_validation.push(param) unless param == 'is_group'
@@ -43,18 +58,29 @@ Puppet::Type.type(:vcsa_sso).provide(:ssh, :parent => Puppet::Provider::Vcsa ) d
     param_list
   end
 
+  def read
+    @read ||= transport.exec!('vpxd_servicecfg sso read')
+  end
+
+  def vpxd_servicecfg
+    @vpxd_servicecfg ||= Hash[*read.split("\n").map{|x| x.split("=",2) if x =~ /^(?!Key not found)/ }.compact.flatten]
+  end
+
   def command
     @command ||= "vpxd_servicecfg sso write#{cmdparams}"
   end
 
   def create
-    transport.exec!(command)
+    servicecfg_catch(transport.exec!(command))
   end
 
   def exists?
-    result = transport.exec!('vpxd_servicecfg sso read')
-    result = Hash[*result.split("\n").map{|x| x.split("=",2) if x =~ /^(?!Key not found)/ }.compact.flatten]
-    result['SSO_TYPE'] != ""
+    vpxd_servicecfg['SSO_TYPE'] != ""
+  end
+
+  def flush
+   servicecfg_catch(transport.exec!(command)) if @update
   end
 end
+
 

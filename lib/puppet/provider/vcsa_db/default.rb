@@ -7,7 +7,7 @@ Puppet::Type.type(:vcsa_db).provide(:ssh, :parent => Puppet::Provider::Vcsa ) do
   @doc = 'Manages vCSA db'
 
   def create
-    transport.exec!("vpxd_servicecfg db write #{resource[:type]}")
+    servicecfg_catch(transport.exec!("vpxd_servicecfg db write #{resource[:type]}"))
   end
 
   def exists?
