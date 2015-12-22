@@ -18,20 +18,12 @@ Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcs
     "\"#{resource[:ntp_servers]}\" #{resource[:options]}"
   end
 
-  def disable
-    transport.exec!('vpxd_servicecfg timesync write none \'\' \'\'')
-  end
-
   def read
     @read ||= transport.exec!('vpxd_servicecfg timesync read')
   end
 
   def create
     servicecfg_catch(transport.exec!("vpxd_servicecfg timesync write #{type} #{cmdparams}"))
-  end
-
-  def test
-    servicecfg_catch(transport.exec!("vpxd_servicecfg timesync test #{type} #{cmdparams}"))
   end
 
   def vpxd_servicecfg

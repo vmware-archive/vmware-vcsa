@@ -11,6 +11,8 @@ define vcsa (
   $db_instance   = undef,
   $db_user       = undef,
   $db_password   = undef,
+  $ntp_servers   = undef,
+  $ntp_options   = undef,
   $sso_db_type   = 'embedded',
   $sso_ls        = undef,
   $sso_login     = undef,
@@ -62,6 +64,13 @@ define vcsa (
 
   vcsa_eula { $name:
     ensure    => accept,
+    transport => Transport[$name],
+  } ->
+
+  vcsa_timesync { $name:
+    ensure      => present,
+    ntp_servers => $ntp_servers,
+    ntp_options => $ntp_options,
     transport => Transport[$name],
   } ->
 
