@@ -30,7 +30,11 @@ Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcs
   @doc = 'Manages vCSA timesync'
 
   def cmdparams
-    if ! resource[:options]
+    if resource[:ntp_servers].nil?
+      raise Puppet::Error, "Parmeter Missing: 'ntp_servers' must be set."
+    end
+
+    if resource[:options].nil?
       resource[:options] = "\'\'"
     end
 
