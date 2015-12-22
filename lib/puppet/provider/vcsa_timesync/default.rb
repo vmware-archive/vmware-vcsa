@@ -30,15 +30,11 @@ Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcs
   @doc = 'Manages vCSA timesync'
 
   def cmdparams
-    ntp_servers = "\"#{resource[:ntp1]},#{resource[:ntp2]}\""
     if ! resource[:options]
       resource[:options] = "\'\'"
     end
-    out = "#{ntp_servers} #{resource[:options]}"
-  end
 
-  def flush
-    create
+    "\"#{resource[:ntp_servers]}\" #{resource[:options]}"
   end
 
   def disable
@@ -62,6 +58,6 @@ Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcs
   end
 
   def exists?
-    "#{resource[:ntp1]}, #{resource[:ntp2]}" = vpxd_servicecfg['VC_TIMESYNC_NTP_SERVERS']
+    "#{resource[:ntp_servers]}" = vpxd_servicecfg['VC_TIMESYNC_NTP_SERVERS']
   end
 end

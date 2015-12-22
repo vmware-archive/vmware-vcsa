@@ -7,20 +7,16 @@ Puppet::Type.newtype(:vcsa_timesync) do
   newparam(:name, :namevar => true) do
   end
 
-  newproperty(:type) do
-    desc 'vCSA dbtype -  embedded or external'
+  newparam(:type) do
+    desc 'vCSA timesync'
     newvalues('ntp', 'tools', 'none')
   end
 
-  newproperty(:ntp1) do
-    desc 'vCSA timesync first ntp server'
+  newparam(:ntp_servers) do
+    desc 'vCSA timesync ntp servers - comma separate the list'
   end
 
-  newproperty(:ntp2) do
-    desc 'vCSA timesync second ntp server'
-  end
-
-  newproperty(:options) do
+  newparam(:options) do
     desc 'vCSA timesync options'
   end
 end
