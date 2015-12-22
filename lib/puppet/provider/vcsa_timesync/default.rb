@@ -3,29 +3,6 @@ require 'pathname'
 provider_path = Pathname.new(__FILE__).parent.parent
 require File.join(provider_path, 'vcsa')
 
-# timesync target modes:
-#   read         : read and return the current settings
-#   write        : will test and save settings
-#   test         : will test settings
-#
-# timesync Options for write/test:
-#   [type] [servers] [options]
-#      type     - ntp, tools or none
-#      servers  - comma separated list of NTP servers (as a single argument, use quotes)
-#      options  - ntpd recognized options to be added on each server line
-
-# Option Tree:
-#   read - no other options
-#   write/test:
-#     - type
-#       - ntp
-#       - tools
-#       - none
-#     - servers
-#       - NTP Servers - comma separated, quoted, one argument
-#     - options
-#       - ntpd options to be added to each server
-
 Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcsa ) do
   @doc = 'Manages vCSA timesync'
 
