@@ -50,11 +50,11 @@ Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcs
   end
 
   def create
-    servicecfg_catch(transport.exec!("vpxd_servicecfg timesync write #{type} #{cmdparams}")
+    servicecfg_catch(transport.exec!("vpxd_servicecfg timesync write #{type} #{cmdparams}"))
   end
 
   def test
-    servicecfg_catch(transport.exec!("vpxd_servicecfg timesync test #{type} #{cmdparams}")
+    servicecfg_catch(transport.exec!("vpxd_servicecfg timesync test #{type} #{cmdparams}"))
   end
 
   def vpxd_servicecfg
@@ -62,6 +62,6 @@ Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcs
   end
 
   def exists?
-    "#{resource[:ntp_servers]}" = vpxd_servicecfg['VC_TIMESYNC_NTP_SERVERS']
+    "#{resource[:ntp_servers]}" == vpxd_servicecfg['VC_TIMESYNC_NTP_SERVERS']
   end
 end
