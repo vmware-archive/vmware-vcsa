@@ -25,6 +25,13 @@ define vcsa (
   $vpxd_state    = 'running'
 ) {
 
+  if ! $ntp_options {
+    $new_ntp_options = ""
+  }
+  else {
+    $new_ntp_options = $ntp_options
+  }
+
   case $capacity {
     's', 'small': {
       $jmx = {
@@ -71,7 +78,7 @@ define vcsa (
     ensure      => present,
     ntp_servers => $ntp_servers,
     ntp_options => $ntp_options,
-    transport => Transport[$name],
+    transport   => Transport[$name],
   } ->
 
   vcsa_db { $name:

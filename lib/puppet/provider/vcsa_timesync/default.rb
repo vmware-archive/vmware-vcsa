@@ -11,11 +11,11 @@ Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcs
       raise Puppet::Error, "Parmeter Missing: 'ntp_servers' must be set."
     end
 
-    if resource[:options].nil?
-      resource[:options] = "\'\'"
+    if resource[:ntp_options].nil?
+      resource[:ntp_options] = "\'\'"
     end
 
-    "\"#{resource[:ntp_servers]}\" #{resource[:options]}"
+    "\"#{resource[:ntp_servers]}\" #{resource[:ntp_options]}"
   end
 
   def read

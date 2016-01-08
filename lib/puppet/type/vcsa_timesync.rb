@@ -16,7 +16,7 @@ Puppet::Type.newtype(:vcsa_timesync) do
     desc 'vCSA timesync ntp servers - comma separate the list'
   end
 
-  newparam(:options) do
+  newparam(:ntp_options) do
     desc 'vCSA timesync options'
   end
 end
