@@ -25,13 +25,6 @@ define vcsa (
   $vpxd_state    = 'running'
 ) {
 
-  if ! $ntp_options {
-    $new_ntp_options = ""
-  }
-  else {
-    $new_ntp_options = $ntp_options
-  }
-
   case $capacity {
     's', 'small': {
       $jmx = {
