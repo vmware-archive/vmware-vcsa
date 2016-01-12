@@ -17,6 +17,6 @@ Puppet::Type.newtype(:vcsa_timesync) do
   end
 
   newparam(:ntp_options) do
-    desc 'vCSA timesync options'
+    desc 'vCSA timesync ntp options'
   end
 end

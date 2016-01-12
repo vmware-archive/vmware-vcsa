@@ -23,7 +23,7 @@ Puppet::Type.type(:vcsa_timesync).provide(:ssh, :parent => Puppet::Provider::Vcs
   end
 
   def create
-    servicecfg_catch(transport.exec!("vpxd_servicecfg timesync write #{type} #{cmdparams}"))
+    servicecfg_catch(transport.exec!("vpxd_servicecfg timesync write #{resource[:type]} #{cmdparams}"))
   end
 
   def vpxd_servicecfg
