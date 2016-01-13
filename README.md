@@ -1,4 +1,4 @@
-# VMware vCSA module
+# VMware vCSA module 
 
 [![Build Status](https://travis-ci.org/vmware/vmware-vcsa.png?branch=master)](https://travis-ci.org/vmware/vmware-vcsa)
 
