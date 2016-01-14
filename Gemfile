@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'net-ssh'
+gem 'net-ssh', '~> 2.9' # net-ssh 3.0 requires ruby 2.x
 
 group :development, :test do
   gem 'rake'

@@ -11,6 +11,8 @@ define vcsa (
   $db_instance   = undef,
   $db_user       = undef,
   $db_password   = undef,
+  $ntp_servers   = undef,
+  $ntp_options   = '""',
   $sso_db_type   = 'embedded',
   $sso_ls        = undef,
   $sso_login     = undef,
@@ -18,6 +20,7 @@ define vcsa (
   $sso_principal = undef,
   $sso_is_group  = undef,
   $sso_thumbprint = undef,
+  $time_type     = 'ntp',
   $capacity      = 'small',    #: inventory accepts small, medium, large, custom
   $java_max_heap = undef,      #: manual jmx heap max size configuration
   $vpxd_state    = 'running'
@@ -63,6 +66,14 @@ define vcsa (
   vcsa_eula { $name:
     ensure    => accept,
     transport => Transport[$name],
+  } ->
+
+  vcsa_timesync { $name:
+    ensure      => present,
+    ntp_servers => $ntp_servers,
+    ntp_options => $ntp_options,
+    type        => $time_type,
+    transport   => Transport[$name],
   } ->
 
   vcsa_db { $name:
