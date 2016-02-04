@@ -63,17 +63,20 @@ define vcsa (
     options  => $ssh_options,
   }
 
+  if $ntp_servers {
+    vcsa_timesync { $name:
+      ensure      => present,
+      ntp_servers => $ntp_servers,
+      ntp_options => $ntp_options,
+      type        => $time_type,
+      transport   => Transport[$name],
+      before      => Vcsa_eula[$name]
+    }
+  }
+
   vcsa_eula { $name:
     ensure    => accept,
     transport => Transport[$name],
-  } ->
-
-  vcsa_timesync { $name:
-    ensure      => present,
-    ntp_servers => $ntp_servers,
-    ntp_options => $ntp_options,
-    type        => $time_type,
-    transport   => Transport[$name],
   } ->
 
   vcsa_db { $name:
