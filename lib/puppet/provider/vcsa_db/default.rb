@@ -12,7 +12,7 @@ Puppet::Type.type(:vcsa_db).provide(:ssh, :parent => Puppet::Provider::Vcsa ) do
 
   def exists?
     result = transport.exec!('vpxd_servicecfg db read')
-    result = Hash[*result.split("\n").collect{|x| x.split('=',2)}.flatten]
+    result = Hash[*result.split("\n").collect{|x| x.split('=',2) if x =~ /=/}.compact.flatten]
     result['VC_DB_TYPE'] != ''
   end
 end

@@ -63,7 +63,7 @@ Puppet::Type.type(:vcsa_sso).provide(:ssh, :parent => Puppet::Provider::Vcsa ) d
   end
 
   def vpxd_servicecfg
-    @vpxd_servicecfg ||= Hash[*read.split("\n").map{|x| x.split("=",2) if x =~ /^(?!Key not found)/ }.compact.flatten]
+    @vpxd_servicecfg ||= Hash[*read.split("\n").map{|x| x.split("=",2) if x =~ /^(?!Key not found)/ && x =~ /=/ }.compact.flatten]
   end
 
   def command

@@ -19,7 +19,7 @@ Puppet::Type.type(:vcsa_java).provide(:ssh, :parent => Puppet::Provider::Vcsa ) 
   def exists?
     result = transport.exec!('vpxd_servicecfg jvm-max-heap read')
     # populating  @property_hash allows us to use mk_resource_methods
-    result = Hash[*result.split("\n").collect{|x| x.split('=',2)}.flatten]
+    result = Hash[*result.split("\n").collect{|x| x.split('=',2) if x =~ /=/}.compact.flatten]
 
     @property_hash[:tomcat]    = result['VC_MAX_HEAP_SIZE_TOMCAT']
     @property_hash[:inventory] = result['VC_MAX_HEAP_SIZE_QS']

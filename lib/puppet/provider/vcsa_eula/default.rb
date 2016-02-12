@@ -12,7 +12,7 @@ Puppet::Type.type(:vcsa_eula).provide(:ssh, :parent => Puppet::Provider::Vcsa ) 
 
   def exists?
     result = transport.exec!('vpxd_servicecfg eula read')
-    result = Hash[*result.split("\n").collect{|x| x.split('=')}.flatten]
+    result = Hash[*result.split("\n").collect{|x| x.split('=',2) if x =~ /=/}.compact.flatten]
     result['VC_EULA_STATUS'] != "0"
   end
 end
